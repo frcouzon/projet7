@@ -1,0 +1,73 @@
+{% extends 'test.html' %}
+{% block content %}
+  <h2>
+   {{ output }}
+  </h2>
+   <div id='chart' class='chart'”></div>
+   <div class="row my-4">
+    <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+        <div class="card">
+            <h5 class="card-header">EXT_SOURCE_1</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{val1}}</h5>
+              <p class="card-text"></p>
+              <p class="card-text text-danger">moyenne : {{moy1}}</p>
+            </div>
+          </div>
+    </div>
+    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+        <div class="card">
+            <h5 class="card-header">EXT_SOURCE_2</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{val2}}</h5>
+              <p class="card-text"></p>
+              <p class="card-text text-danger">moyenne : {{moy2}}</p>
+            </div>
+          </div>
+    </div>
+    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+        <div class="card">
+            <h5 class="card-header">EXT_SOURCE_3</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{val3}}</h5>
+              <p class="card-text"></p>
+              <p class="card-text text-danger">moyene : {{moy3}}</p>
+            </div>
+          </div>
+    </div>
+    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+        <div class="card">
+            <h5 class="card-header">DAYS_EMPLOYED_PERC</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{val4}}</h5>
+              <p class="card-text"></p>
+              <p class="card-text text-danger">moyenne : {{moy4}}</p>
+            </div>
+          </div>
+    </div>
+  </div>
+
+   <h1>{{client}}</h1>
+   <form action="{{ url_for('getexplication')}}"method="post">
+   <select name="col_group_name" id="col_group">
+    <option value="EXT_SOURCE_1">EXT_SOURCE_1</option>
+    <option value="EXT_SOURCE_2">EXT_SOURCE_2</option>
+    <option value="EXT_SOURCE_3">EXT_SOURCE_3</option>
+    <option value="EXT_SOURCE_3">DAYS_EMPLOYED_PERC</option>
+  </select>
+      <button type="submit" class="btn btn-primary">voir</button>
+  </form>
+  <div id="wrapper">
+    <div id="left">
+        {{ div | safe }}
+        {{ script | safe }}
+    </div>
+  </div>
+
+  {{ output2 }}
+{% endblock %}
+
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>var graphs = {{ graphJSON | safe }};Plotly.plot('chart',graphs,{});
+</script>
